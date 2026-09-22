@@ -13,17 +13,11 @@ import {
 import { createClient } from "@/lib/supabase/server";
 import { getStaff } from "@/lib/staff";
 import { ChildForm } from "../child-form";
+import { ChildTabs, type TabKey } from "./child-tabs";
 import { addSuggestedTarget, setTargetStatus } from "./actions";
 import { AddTargetForm } from "./add-target-form";
 
 export const metadata: Metadata = { title: "Карточка ребёнка · АВА-занятия" };
-
-const TABS = [
-  { key: "program", label: "Программа" },
-  { key: "history", label: "История" },
-  { key: "data", label: "Данные" },
-] as const;
-type Tab = (typeof TABS)[number]["key"];
 
 const SIGN: Record<string, string> = { S: "С", P: "+", M: "−" };
 
@@ -36,7 +30,7 @@ const STATUS_STYLE: Record<string, string> = {
 export default async function ChildPage({ params, searchParams }: PageProps<"/children/[id]">) {
   const { id } = await params;
   const sp = await searchParams;
-  const tab: Tab = TABS.some((t) => t.key === sp.tab) ? (sp.tab as Tab) : "program";
+  const tab: TabKey = ["program", "history", "data"].includes(String(sp.tab)) ? (sp.tab as TabKey) : "program";
 
   const staff = await getStaff();
   if (!staff) notFound();
@@ -121,23 +115,9 @@ export default async function ChildPage({ params, searchParams }: PageProps<"/ch
         </Link>
       </header>
 
-      <nav className="mt-6 flex gap-1 rounded-xl bg-border/60 p-1" aria-label="Разделы карточки">
-        {TABS.map((t) => (
-          <Link
-            key={t.key}
-            href={`/children/${child.id}?tab=${t.key}`}
-            aria-current={tab === t.key ? "page" : undefined}
-            className={`flex h-12 flex-1 items-center justify-center rounded-lg text-sm font-semibold ${
-              tab === t.key ? "bg-surface text-primary shadow-sm" : "text-foreground hover:bg-surface/60"
-            }`}
-          >
-            {t.label}
-          </Link>
-        ))}
-      </nav>
-
-      <div className="mt-4">
-        {tab === "program" && (
+      <ChildTabs
+        initial={tab}
+        program={
           <ProgramTab
             childId={child.id}
             added={sp.added === "1"}
@@ -147,38 +127,39 @@ export default async function ChildPage({ params, searchParams }: PageProps<"/ch
             skills={allSkills}
             skillById={skillById}
           />
-        )}
-        {tab === "history" && <HistoryTab lessons={lessons ?? []} sessions={allSessions} targetName={targetName} />}
-        {tab === "data" && isSupervisor && (
-          <ChildForm
-            child={{
-              id: child.id,
-              last_name: child.last_name,
-              first_name: child.first_name,
-              patronymic: child.patronymic,
-              birth_date: child.birth_date,
-              methods: child.methods,
-              specialist_id: child.specialist_id,
-            }}
-            specialists={specialists ?? []}
-          />
-        )}
-        {tab === "data" && !isSupervisor && (
-          <dl className="space-y-3 rounded-2xl border border-border bg-surface p-4">
-            {[
-              ["ФИО", fullName(child)],
-              ["Дата рождения", `${dateLabel(child.birth_date)} (${ageLabel(child.birth_date)})`],
-              ["Методики", child.methods.map((m) => METHOD_LABEL[m] ?? m).join(", ") || "не указаны"],
-              ["Специалист", child.specialist?.full_name ?? "не назначен"],
-            ].map(([k, v]) => (
-              <div key={k}>
-                <dt className="text-sm text-muted">{k}</dt>
-                <dd className="font-semibold">{v}</dd>
-              </div>
-            ))}
-          </dl>
-        )}
-      </div>
+        }
+        history={<HistoryTab lessons={lessons ?? []} sessions={allSessions} targetName={targetName} />}
+        data={
+          isSupervisor ? (
+            <ChildForm
+              child={{
+                id: child.id,
+                last_name: child.last_name,
+                first_name: child.first_name,
+                patronymic: child.patronymic,
+                birth_date: child.birth_date,
+                methods: child.methods,
+                specialist_id: child.specialist_id,
+              }}
+              specialists={specialists ?? []}
+            />
+          ) : (
+            <dl className="space-y-3 rounded-2xl border border-border bg-surface p-4">
+              {[
+                ["ФИО", fullName(child)],
+                ["Дата рождения", `${dateLabel(child.birth_date)} (${ageLabel(child.birth_date)})`],
+                ["Методики", child.methods.map((m) => METHOD_LABEL[m] ?? m).join(", ") || "не указаны"],
+                ["Специалист", child.specialist?.full_name ?? "не назначен"],
+              ].map(([k, v]) => (
+                <div key={k}>
+                  <dt className="text-sm text-muted">{k}</dt>
+                  <dd className="font-semibold">{v}</dd>
+                </div>
+              ))}
+            </dl>
+          )
+        }
+      />
     </>
   );
 }

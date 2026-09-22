@@ -27,9 +27,10 @@ export async function proxy(request: NextRequest) {
     },
   );
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  // Подпись пропуска проверяем на месте: к серверу базы идём, только когда
+  // пропуск пора продлить (раз в час), а не на каждой странице.
+  const { data: claims } = await supabase.auth.getClaims();
+  const user = claims?.claims ?? null;
 
   const path = request.nextUrl.pathname;
   const isLoginPage = path === "/login";

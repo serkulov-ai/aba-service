@@ -9,16 +9,16 @@ export type Staff = Tables<"profiles">;
 // null — вошёл, но роли нет (сам зарегистрировался): доступа ни к чему нет.
 export const getStaff = cache(async (): Promise<Staff | null> => {
   const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  // Проверка подписи пропуска на месте, без обращения к серверу базы.
+  const { data } = await supabase.auth.getClaims();
+  const userId = data?.claims?.sub;
 
-  if (!user) redirect("/login");
+  if (!userId) redirect("/login");
 
   const { data: profile } = await supabase
     .from("profiles")
     .select("*")
-    .eq("id", user.id)
+    .eq("id", userId)
     .maybeSingle();
 
   return profile;
