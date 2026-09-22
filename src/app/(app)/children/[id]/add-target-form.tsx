@@ -74,14 +74,14 @@ export function AddTargetForm({
         </label>
         <p className="text-sm text-muted">Новая цель начинается с задержки 0 сек.</p>
         {state.error && (
-          <p role="alert" className="rounded-xl bg-incorrect/10 px-4 py-3 text-sm text-incorrect">
+          <p role="alert" className="rounded-xl bg-incorrect/10 px-4 py-3 text-sm text-incorrect-ink">
             {state.error}
           </p>
         )}
         <button
           type="submit"
           disabled={pending}
-          className="h-12 w-full rounded-xl bg-primary font-semibold text-white hover:bg-primary-hover disabled:opacity-60"
+          className="h-12 w-full rounded-xl bg-primary font-semibold text-on-primary hover:bg-primary-hover disabled:opacity-60"
         >
           {pending ? "Сохраняем…" : "Добавить в программу"}
         </button>

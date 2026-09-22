@@ -10,7 +10,7 @@ export default async function AppLayout({ children }: LayoutProps<"/">) {
     <div className="flex flex-1 flex-col">
       <header className="border-b border-border bg-surface pt-[env(safe-area-inset-top)]">
         <div className="mx-auto flex h-14 max-w-3xl items-center justify-between gap-3 px-4">
-          <Link href="/" className="font-heading text-lg font-bold text-primary">
+          <Link href="/" className="shrink-0 font-heading text-lg font-bold whitespace-nowrap text-primary">
             АВА-занятия
           </Link>
           <div className="flex min-w-0 items-center gap-3">

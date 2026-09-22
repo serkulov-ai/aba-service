@@ -502,7 +502,7 @@ export function LessonRunner({ child, staffName, targets, history, assistants }:
           <SuggestionBox suggestion={s} delay={last.delay} onAccept={() => decide(true)} onDecline={() => decide(false)} />
         )}
         {s && last.decision === "accepted" && (
-          <p className="mt-4 rounded-2xl bg-independent/10 p-4 font-semibold text-independent">
+          <p className="mt-4 rounded-2xl bg-independent/10 p-4 font-semibold text-independent-ink">
             {s.kind === "mastered" ? "Цель отмечена освоенной." : `Задержка изменена: ${s.to} сек.`}
           </p>
         )}
@@ -512,7 +512,7 @@ export function LessonRunner({ child, staffName, targets, history, assistants }:
             <button
               type="button"
               onClick={() => openTarget(target.id)}
-              className="h-12 rounded-xl bg-primary font-semibold text-white hover:bg-primary-hover"
+              className="h-12 rounded-xl bg-primary font-semibold text-on-primary hover:bg-primary-hover"
             >
               Ещё круг по этой цели ({delay} сек)
             </button>
@@ -606,7 +606,7 @@ function SuggestionBox({
         <button
           type="button"
           onClick={onAccept}
-          className="h-12 rounded-xl bg-primary font-semibold text-white hover:bg-primary-hover"
+          className="h-12 rounded-xl bg-primary font-semibold text-on-primary hover:bg-primary-hover"
         >
           {accept}
         </button>
@@ -678,7 +678,7 @@ function Setup({
           <button
             type="button"
             onClick={() => onStart(assistantId || null, parentPresent)}
-            className="h-12 w-full rounded-xl bg-primary font-semibold text-white hover:bg-primary-hover"
+            className="h-12 w-full rounded-xl bg-primary font-semibold text-on-primary hover:bg-primary-hover"
           >
             Начать
           </button>

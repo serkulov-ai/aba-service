@@ -46,7 +46,7 @@ export function LoginForm() {
       </label>
 
       {error && (
-        <p role="alert" className="rounded-xl bg-incorrect/10 px-4 py-3 text-sm text-incorrect">
+        <p role="alert" className="rounded-xl bg-incorrect/10 px-4 py-3 text-sm text-incorrect-ink">
           {error}
         </p>
       )}
@@ -54,7 +54,7 @@ export function LoginForm() {
       <button
         type="submit"
         disabled={pending}
-        className="h-12 w-full rounded-xl bg-primary font-semibold text-white transition-colors hover:bg-primary-hover disabled:opacity-60"
+        className="h-12 w-full rounded-xl bg-primary font-semibold text-on-primary transition-colors hover:bg-primary-hover disabled:opacity-60"
       >
         {pending ? "Входим…" : "Войти"}
       </button>

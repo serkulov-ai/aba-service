@@ -23,7 +23,7 @@ const SIGN: Record<string, string> = { S: "С", P: "+", M: "−" };
 
 const STATUS_STYLE: Record<string, string> = {
   in_progress: "bg-primary-soft text-primary",
-  mastered: "bg-independent/10 text-independent",
+  mastered: "bg-independent/10 text-independent-ink",
   paused: "bg-border text-muted",
 };
 
@@ -109,7 +109,7 @@ export default async function ChildPage({ params, searchParams }: PageProps<"/ch
         <p className="mt-2 text-sm text-muted">Специалист: {child.specialist?.full_name ?? "не назначен"}</p>
         <Link
           href={`/children/${child.id}/lesson`}
-          className="mt-4 flex h-12 items-center justify-center rounded-xl bg-primary font-semibold text-white hover:bg-primary-hover"
+          className="mt-4 flex h-12 items-center justify-center rounded-xl bg-primary font-semibold text-on-primary hover:bg-primary-hover"
         >
           Начать занятие
         </Link>
@@ -234,7 +234,7 @@ function ProgramTab({
   return (
     <div className="space-y-4">
       {added && (
-        <p role="status" className="rounded-xl bg-independent/10 px-4 py-3 text-sm font-semibold text-independent">
+        <p role="status" className="rounded-xl bg-independent/10 px-4 py-3 text-sm font-semibold text-independent-ink">
           Навык добавлен в программу.
         </p>
       )}
@@ -252,7 +252,7 @@ function ProgramTab({
               Выбрать другую
             </Link>
             <form action={addSuggestedTarget.bind(null, childId, next.id)}>
-              <button type="submit" className="h-12 w-full rounded-xl bg-primary font-semibold text-white hover:bg-primary-hover">
+              <button type="submit" className="h-12 w-full rounded-xl bg-primary font-semibold text-on-primary hover:bg-primary-hover">
                 Добавить в программу
               </button>
             </form>

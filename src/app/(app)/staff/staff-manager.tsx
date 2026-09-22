@@ -20,7 +20,7 @@ function Credentials({ name, email, password }: { name: string; email: string; p
   const text = `Доступ в сервис АВА-занятия\nАдрес: ${typeof window === "undefined" ? "" : window.location.origin}\nПочта: ${email}\nПароль: ${password}`;
   return (
     <div className="rounded-xl bg-independent/10 p-4 text-sm">
-      <p className="font-semibold text-independent">Готово. Передайте {name} эти данные.</p>
+      <p className="font-semibold text-independent-ink">Готово. Передайте {name} эти данные.</p>
       <p className="mt-2">
         Почта: <span className="font-semibold">{email}</span>
         <br />
@@ -64,7 +64,7 @@ function NewStaffForm() {
         </label>
         <p className="text-sm text-muted">Пароль сервис придумает сам и покажет один раз.</p>
         {state.error && (
-          <p role="alert" className="rounded-xl bg-incorrect/10 px-4 py-3 text-sm text-incorrect">
+          <p role="alert" className="rounded-xl bg-incorrect/10 px-4 py-3 text-sm text-incorrect-ink">
             {state.error}
           </p>
         )}
@@ -72,7 +72,7 @@ function NewStaffForm() {
         <button
           type="submit"
           disabled={pending}
-          className="h-12 w-full rounded-xl bg-primary font-semibold text-white hover:bg-primary-hover disabled:opacity-60"
+          className="h-12 w-full rounded-xl bg-primary font-semibold text-on-primary hover:bg-primary-hover disabled:opacity-60"
         >
           {pending ? "Заводим…" : "Завести доступ"}
         </button>
@@ -119,7 +119,7 @@ function StaffRow({ member, isSelf }: { member: StaffMember; isSelf: boolean }) 
       </div>
 
       {state.error && (
-        <p role="alert" className="mt-2 rounded-xl bg-incorrect/10 px-4 py-3 text-sm text-incorrect">
+        <p role="alert" className="mt-2 rounded-xl bg-incorrect/10 px-4 py-3 text-sm text-incorrect-ink">
           {state.error}
         </p>
       )}
@@ -140,11 +140,11 @@ function NewAssistantForm() {
         <span className="text-sm font-semibold">Имя феи</span>
         <input name="fullName" required maxLength={100} className="mt-1 h-12 w-full rounded-xl border border-border bg-surface px-3" />
       </label>
-      <button type="submit" disabled={pending} className="mt-6 h-12 rounded-xl bg-primary px-4 font-semibold text-white hover:bg-primary-hover disabled:opacity-60">
+      <button type="submit" disabled={pending} className="mt-6 h-12 rounded-xl bg-primary px-4 font-semibold text-on-primary hover:bg-primary-hover disabled:opacity-60">
         {pending ? "Добавляем…" : "Добавить"}
       </button>
       {state.error && (
-        <p role="alert" className="w-full rounded-xl bg-incorrect/10 px-4 py-3 text-sm text-incorrect">
+        <p role="alert" className="w-full rounded-xl bg-incorrect/10 px-4 py-3 text-sm text-incorrect-ink">
           {state.error}
         </p>
       )}
@@ -168,7 +168,7 @@ export function StaffManager({
       <h1 className="text-2xl font-bold">Сотрудники</h1>
 
       {error ? (
-        <p role="alert" className="mt-4 rounded-2xl bg-incorrect/10 p-4 text-sm text-incorrect">
+        <p role="alert" className="mt-4 rounded-2xl bg-incorrect/10 p-4 text-sm text-incorrect-ink">
           {error}
         </p>
       ) : (

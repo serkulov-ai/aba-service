@@ -30,7 +30,7 @@ export function SyncBanner() {
   }
   if (state === "error") {
     return (
-      <p role="alert" className="mb-4 rounded-xl bg-incorrect/10 px-4 py-3 text-sm text-incorrect">
+      <p role="alert" className="mb-4 rounded-xl bg-incorrect/10 px-4 py-3 text-sm text-incorrect-ink">
         Не удалось сохранить сессию. Мы попробуем ещё раз автоматически.
       </p>
     );
@@ -209,7 +209,7 @@ export function ConfirmDialog({
           <button
             type="button"
             onClick={onConfirm}
-            className="h-12 rounded-xl bg-primary font-semibold text-white hover:bg-primary-hover"
+            className="h-12 rounded-xl bg-primary font-semibold text-on-primary hover:bg-primary-hover"
           >
             {confirmLabel}
           </button>

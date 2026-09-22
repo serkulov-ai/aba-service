@@ -8,7 +8,7 @@ export default function NotFound() {
         <p className="mt-2 text-muted">Возможно, ребёнка удалили или ссылка устарела.</p>
         <Link
           href="/"
-          className="mt-4 flex h-12 items-center justify-center rounded-xl bg-primary font-semibold text-white hover:bg-primary-hover"
+          className="mt-4 flex h-12 items-center justify-center rounded-xl bg-primary font-semibold text-on-primary hover:bg-primary-hover"
         >
           К списку детей
         </Link>

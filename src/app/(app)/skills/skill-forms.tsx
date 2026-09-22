@@ -53,13 +53,13 @@ function Fields({ skill }: { skill?: SkillFields }) {
 function Result({ state }: { state: SkillFormState }) {
   if (state.error)
     return (
-      <p role="alert" className="rounded-xl bg-incorrect/10 px-4 py-3 text-sm text-incorrect">
+      <p role="alert" className="rounded-xl bg-incorrect/10 px-4 py-3 text-sm text-incorrect-ink">
         {state.error}
       </p>
     );
   if (state.saved)
     return (
-      <p role="status" className="rounded-xl bg-independent/10 px-4 py-3 text-sm font-semibold text-independent">
+      <p role="status" className="rounded-xl bg-independent/10 px-4 py-3 text-sm font-semibold text-independent-ink">
         Изменения сохранены.
       </p>
     );
@@ -76,7 +76,7 @@ export function EditSkillForm({ skill }: { skill: SkillFields & { id: string } }
       <button
         type="submit"
         disabled={pending}
-        className="h-12 w-full rounded-xl bg-primary font-semibold text-white hover:bg-primary-hover disabled:opacity-60"
+        className="h-12 w-full rounded-xl bg-primary font-semibold text-on-primary hover:bg-primary-hover disabled:opacity-60"
       >
         {pending ? "Сохраняем…" : "Сохранить"}
       </button>
@@ -110,7 +110,7 @@ export function AddSkillForm({ domains }: { domains: { id: string; name: string 
         <button
           type="submit"
           disabled={pending}
-          className="h-12 w-full rounded-xl bg-primary font-semibold text-white hover:bg-primary-hover disabled:opacity-60"
+          className="h-12 w-full rounded-xl bg-primary font-semibold text-on-primary hover:bg-primary-hover disabled:opacity-60"
         >
           {pending ? "Сохраняем…" : "Добавить навык"}
         </button>
@@ -138,12 +138,12 @@ export function AddDomainForm() {
         <button
           type="submit"
           disabled={pending}
-          className="mt-6 h-12 rounded-xl bg-primary px-4 font-semibold text-white hover:bg-primary-hover disabled:opacity-60"
+          className="mt-6 h-12 rounded-xl bg-primary px-4 font-semibold text-on-primary hover:bg-primary-hover disabled:opacity-60"
         >
           {pending ? "Сохраняем…" : "Добавить"}
         </button>
         {state.error && (
-          <p role="alert" className="w-full rounded-xl bg-incorrect/10 px-4 py-3 text-sm text-incorrect">
+          <p role="alert" className="w-full rounded-xl bg-incorrect/10 px-4 py-3 text-sm text-incorrect-ink">
             {state.error}
           </p>
         )}

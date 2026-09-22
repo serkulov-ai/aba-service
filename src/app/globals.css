@@ -1,24 +1,92 @@
 @import "tailwindcss";
 
-/* Цвета из DESIGN.md, раздел 5. Использовать только через эти переменные. */
+/* Цвета из DESIGN.md, раздел 5. Использовать только через эти переменные.
+   Тёмная тема — для вечерних занятий: приглушённые кнопки, без белых плоскостей. */
 :root {
   --primary: #6b4fa0;
   --primary-soft: #eee9f6;
   --primary-hover: #5a4189;
+  --on-primary: #ffffff; /* текст на фиолетовой кнопке */
   --background: #faf8f5;
   --surface: #ffffff;
   --foreground: #2a2733;
   --muted: #6e6a78;
   --border: #e4e0ea;
-  --independent: #1f8150; /* С — сам. Проверен на различимость с --primary (dataviz validator) */
+
+  /* Кнопки проб: фон под белый текст */
+  --independent: #1f8150; /* С — сам */
   --prompted: #b7791f; /* + — с подсказкой */
   --incorrect: #b42318; /* − — неверно, ошибки */
+
+  /* Те же смыслы в виде текста на фоне страницы */
+  --independent-ink: #1f8150;
+  --prompted-ink: #b7791f;
+  --incorrect-ink: #b42318;
+
+  /* Линии графиков: проверены валидатором на различимость */
+  --chart-primary: #6b4fa0;
+  --chart-independent: #1f8150;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --primary: #9b7ae6;
+    --primary-soft: #2b2540;
+    --primary-hover: #ae92ee;
+    --on-primary: #17131f;
+    --background: #15141b;
+    --surface: #1e1c26;
+    --foreground: #eae7f2;
+    --muted: #a49fb0;
+    --border: #302c3c;
+
+    --independent: #24794c;
+    --prompted: #8f6418;
+    --incorrect: #93332b;
+
+    --independent-ink: #35a86c;
+    --prompted-ink: #d5a04a;
+    --incorrect-ink: #e4796f;
+
+    --chart-primary: #9b7ae6;
+    --chart-independent: #35a86c;
+
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --primary: #9b7ae6;
+  --primary-soft: #2b2540;
+  --primary-hover: #ae92ee;
+  --on-primary: #17131f;
+  --background: #15141b;
+  --surface: #1e1c26;
+  --foreground: #eae7f2;
+  --muted: #a49fb0;
+  --border: #302c3c;
+
+  --independent: #24794c;
+  --prompted: #8f6418;
+  --incorrect: #93332b;
+
+  --independent-ink: #35a86c;
+  --prompted-ink: #d5a04a;
+  --incorrect-ink: #e4796f;
+
+  --chart-primary: #9b7ae6;
+  --chart-independent: #35a86c;
+
+  color-scheme: dark;
 }
 
 @theme inline {
   --color-primary: var(--primary);
   --color-primary-soft: var(--primary-soft);
   --color-primary-hover: var(--primary-hover);
+  --color-on-primary: var(--on-primary);
   --color-background: var(--background);
   --color-surface: var(--surface);
   --color-foreground: var(--foreground);
@@ -27,6 +95,9 @@
   --color-independent: var(--independent);
   --color-prompted: var(--prompted);
   --color-incorrect: var(--incorrect);
+  --color-independent-ink: var(--independent-ink);
+  --color-prompted-ink: var(--prompted-ink);
+  --color-incorrect-ink: var(--incorrect-ink);
   --font-sans: var(--font-golos);
   --font-heading: var(--font-manrope);
 }
@@ -42,4 +113,16 @@ h1,
 h2,
 h3 {
   font-family: var(--font-manrope), system-ui, sans-serif;
+}
+
+/* Длинные имена детей и названия навыков не должны вылезать за край экрана */
+h1,
+h2,
+h3,
+p,
+li,
+summary,
+dd,
+dt {
+  overflow-wrap: anywhere;
 }

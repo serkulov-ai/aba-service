@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Golos_Text, Manrope } from "next/font/google";
 import { ServiceWorker } from "@/components/service-worker";
+import { themeScript } from "@/components/theme-toggle";
 import "./globals.css";
 
 const golos = Golos_Text({
@@ -39,8 +40,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="ru"
+      // Тему выставляет скрипт до отрисовки — расхождение с сервером тут ожидаемо.
+      suppressHydrationWarning
       className={`${golos.variable} ${manrope.variable} h-full antialiased`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="min-h-full flex flex-col">
         {children}
         <ServiceWorker />

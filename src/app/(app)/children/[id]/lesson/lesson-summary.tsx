@@ -165,7 +165,7 @@ export function LessonSummary({
                 ))}
               </ul>
               {t.mastered ? (
-                <p className="mt-2 text-sm font-semibold text-independent">Цель освоена</p>
+                <p className="mt-2 text-sm font-semibold text-independent-ink">Цель освоена</p>
               ) : (
                 t.fromDelay !== t.toDelay && (
                   <p className="mt-2 text-sm font-semibold text-primary">
@@ -204,7 +204,7 @@ export function LessonSummary({
         </button>
         {ai === "loading" && <p className="mt-2 text-sm text-muted">Обычно 10–20 секунд.</p>}
         {ai === "error" && (
-          <p role="alert" className="mt-2 rounded-xl bg-incorrect/10 px-4 py-3 text-sm text-incorrect">
+          <p role="alert" className="mt-2 rounded-xl bg-incorrect/10 px-4 py-3 text-sm text-incorrect-ink">
             Не получилось подготовить черновик. Напишите отчёт сами или попробуйте ещё раз.
           </p>
         )}
@@ -253,7 +253,7 @@ export function LessonSummary({
             void save();
             window.open(`https://wa.me/?text=${encodeURIComponent(report.parent.trim())}`, "_blank", "noopener");
           }}
-          className="h-12 rounded-xl bg-primary font-semibold text-white hover:bg-primary-hover disabled:opacity-50"
+          className="h-12 rounded-xl bg-primary font-semibold text-on-primary hover:bg-primary-hover disabled:opacity-50"
         >
           Отправить в WhatsApp
         </button>
@@ -279,7 +279,7 @@ export function LessonSummary({
           </button>
         </div>
         {notice && (
-          <p role="status" className="rounded-xl bg-independent/10 px-4 py-3 text-sm font-semibold text-independent">
+          <p role="status" className="rounded-xl bg-independent/10 px-4 py-3 text-sm font-semibold text-independent-ink">
             {notice}
           </p>
         )}

@@ -84,12 +84,12 @@ export function ChildForm({
       </label>
 
       {state.error && (
-        <p role="alert" className="rounded-xl bg-incorrect/10 px-4 py-3 text-sm text-incorrect">
+        <p role="alert" className="rounded-xl bg-incorrect/10 px-4 py-3 text-sm text-incorrect-ink">
           {state.error}
         </p>
       )}
       {state.saved && (
-        <p role="status" className="rounded-xl bg-independent/10 px-4 py-3 text-sm font-semibold text-independent">
+        <p role="status" className="rounded-xl bg-independent/10 px-4 py-3 text-sm font-semibold text-independent-ink">
           Изменения сохранены.
         </p>
       )}
@@ -97,7 +97,7 @@ export function ChildForm({
       <button
         type="submit"
         disabled={pending}
-        className="h-12 w-full rounded-xl bg-primary font-semibold text-white hover:bg-primary-hover disabled:opacity-60"
+        className="h-12 w-full rounded-xl bg-primary font-semibold text-on-primary hover:bg-primary-hover disabled:opacity-60"
       >
         {pending ? "Сохраняем…" : child ? "Сохранить" : "Добавить ребёнка"}
       </button>

@@ -44,7 +44,7 @@ export default async function ChildrenPage({ searchParams }: PageProps<"/">) {
         {isSupervisor && (
           <Link
             href="/children/new"
-            className="flex h-12 items-center rounded-xl bg-primary px-4 font-semibold text-white hover:bg-primary-hover"
+            className="flex h-12 items-center rounded-xl bg-primary px-4 font-semibold text-on-primary hover:bg-primary-hover"
           >
             Добавить ребёнка
           </Link>
@@ -57,9 +57,9 @@ export default async function ChildrenPage({ searchParams }: PageProps<"/">) {
           defaultValue={query}
           placeholder="Найти ребёнка"
           aria-label="Найти ребёнка"
-          className="h-12 flex-1 rounded-xl border border-border bg-surface px-4 placeholder:text-muted"
+          className="h-12 min-w-0 flex-1 rounded-xl border border-border bg-surface px-4 placeholder:text-muted"
         />
-        <button type="submit" className="h-12 rounded-xl border border-border px-4 font-semibold hover:bg-primary-soft">
+        <button type="submit" className="h-12 shrink-0 rounded-xl border border-border px-4 font-semibold hover:bg-primary-soft">
           Найти
         </button>
       </form>
@@ -69,7 +69,7 @@ export default async function ChildrenPage({ searchParams }: PageProps<"/">) {
           <p>Не удалось загрузить список. Обновите страницу.</p>
           <Link
             href="/"
-            className="mt-4 inline-flex h-12 items-center rounded-xl bg-primary px-5 font-semibold text-white hover:bg-primary-hover"
+            className="mt-4 inline-flex h-12 items-center rounded-xl bg-primary px-5 font-semibold text-on-primary hover:bg-primary-hover"
           >
             Обновить
           </Link>
@@ -123,7 +123,7 @@ export default async function ChildrenPage({ searchParams }: PageProps<"/">) {
               </Link>
               <Link
                 href={`/children/${child.id}/lesson`}
-                className="mt-1 flex h-12 items-center justify-center rounded-xl bg-primary font-semibold text-white hover:bg-primary-hover"
+                className="mt-1 flex h-12 items-center justify-center rounded-xl bg-primary font-semibold text-on-primary hover:bg-primary-hover"
               >
                 Начать занятие
               </Link>

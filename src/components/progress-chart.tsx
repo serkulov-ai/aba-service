@@ -11,8 +11,8 @@ const H = 96;
 const PAD = { top: 8, right: 8, bottom: 8, left: 8 };
 
 const SERIES = [
-  { key: "correctPct", label: "Правильных", color: "var(--primary)" },
-  { key: "independentPct", label: "Самостоятельных", color: "var(--independent)" },
+  { key: "correctPct", label: "Правильных", color: "var(--chart-primary)" },
+  { key: "independentPct", label: "Самостоятельных", color: "var(--chart-independent)" },
 ] as const;
 
 export function ProgressChart({ points }: { points: ChartPoint[] }) {

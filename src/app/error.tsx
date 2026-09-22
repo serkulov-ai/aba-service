@@ -10,7 +10,7 @@ export default function Error({ reset }: { error: Error & { digest?: string }; r
       <button
         type="button"
         onClick={reset}
-        className="mt-4 h-12 w-full rounded-xl bg-primary font-semibold text-white hover:bg-primary-hover"
+        className="mt-4 h-12 w-full rounded-xl bg-primary font-semibold text-on-primary hover:bg-primary-hover"
       >
         Попробовать снова
       </button>
