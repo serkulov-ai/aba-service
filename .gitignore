@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# шаблон с именами переменных без значений — можно хранить в git
+!.env.example
