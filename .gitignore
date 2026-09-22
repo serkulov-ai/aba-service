@@ -42,3 +42,6 @@ next-env.d.ts
 
 # шаблон с именами переменных без значений — можно хранить в git
 !.env.example
+
+# Local Netlify folder
+.netlify

@@ -90,10 +90,29 @@ export function LessonSummary({
     onReport({ ...report, ...patch });
   };
 
-  const save = (message = "Занятие сохранено.") => {
-    void enqueue({ type: "lesson.update", id: lessonId, patch: reportPatch(report) });
-    setNotice(message);
-  };
+  // Пишем «сохранено» только после подтверждения сервера: иначе специалист
+  // закроет приложение и потеряет отчёт, думая, что всё на месте.
+  const [saving, setSaving] = useState(false);
+
+  async function save() {
+    setSaving(true);
+    setNotice(null);
+    await enqueue({ type: "lesson.update", id: lessonId, patch: reportPatch(report) });
+    try {
+      await flush();
+    } catch {
+      // состояние очереди разберём ниже
+    }
+    const left = await pendingCount();
+    setSaving(false);
+    setNotice(
+      left === 0
+        ? "Занятие сохранено."
+        : navigator.onLine
+          ? "Пока не получилось отправить. Отправим ещё раз автоматически, не закрывайте сервис."
+          : "Сохранено на телефоне. Отправим на сервер, когда появится связь.",
+    );
+  }
 
   async function makeDraft() {
     setAi("loading");
@@ -231,7 +250,7 @@ export function LessonSummary({
           type="button"
           disabled={!report.parent.trim()}
           onClick={() => {
-            save();
+            void save();
             window.open(`https://wa.me/?text=${encodeURIComponent(report.parent.trim())}`, "_blank", "noopener");
           }}
           className="h-12 rounded-xl bg-primary font-semibold text-white hover:bg-primary-hover disabled:opacity-50"
@@ -252,10 +271,11 @@ export function LessonSummary({
           </button>
           <button
             type="button"
-            onClick={() => save()}
-            className="h-12 rounded-xl border border-border font-semibold hover:bg-primary-soft"
+            onClick={() => void save()}
+            disabled={saving}
+            className="h-12 rounded-xl border border-border font-semibold hover:bg-primary-soft disabled:opacity-60"
           >
-            Сохранить
+            {saving ? "Сохраняем…" : "Сохранить"}
           </button>
         </div>
         {notice && (
