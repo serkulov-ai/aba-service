@@ -44,10 +44,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
       className={`${golos.variable} ${manrope.variable} h-full antialiased`}
     >
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-      </head>
       <body className="min-h-full flex flex-col">
+        {/* Выставляет тему до отрисовки содержимого: ночью не мигает белым.
+            Внутри <body>, потому что <head> в App Router формирует сам Next.js. */}
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         {children}
         <ServiceWorker />
       </body>
